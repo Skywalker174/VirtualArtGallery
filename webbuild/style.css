@@ -1,0 +1,157 @@
+:root {
+    --bg: #080808;
+    --text: #ffffff;
+    --accent: #ffffff;
+    --dim: #444;
+    --transition: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { box-sizing: border-box; }
+
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+/* Texture Overlay for that premium feel */
+.noise-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04; pointer-events: none; z-index: 1001;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.2s var(--transition), transform 1.2s var(--transition);
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.content-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Header/Footer labels */
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--dim);
+}
+
+/* Hero Section */
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 300;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.curator-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--dim);
+    margin-top: 20px;
+}
+
+/* Loader */
+.loader-container {
+    margin: 60px auto;
+    width: 300px;
+    transition: opacity 0.5s;
+}
+
+#progress-line {
+    width: 0%;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.4s ease;
+}
+
+#progress-percentage {
+    font-size: 10px;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    color: var(--dim);
+}
+
+/* Enter Button */
+#enter-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 20px 60px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.4s var(--transition);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#enter-btn.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+#enter-btn:hover {
+    letter-spacing: 6px;
+    background: #e0e0e0;
+}
+
+/* HUD Overlay */
+.gallery-nav {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.gallery-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 300;
+}
+
+.dim { color: var(--dim); }
+
+#fullscreen-trigger {
+    pointer-events: auto;
+    background: none; border: none; color: white;
+    font-size: 1.2rem; cursor: pointer; opacity: 0.3;
+}
+
+#fullscreen-trigger:hover { opacity: 1; }
+
+#unity-canvas {
+    width: 100vw; height: 100vh;
+    background: #000;
+}

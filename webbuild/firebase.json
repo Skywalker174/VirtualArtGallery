@@ -1,0 +1,32 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "!/Build/**", 
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/**",
+        "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]
+      },
+      {
+        "source": "Build/*.unityweb", 
+        "headers": [
+          {"key": "Content-Encoding", "value": "br"}
+        ]
+      },
+      {
+        "source": "Build/*.wasm.unityweb", 
+        "headers": [{"key": "Content-Type", "value": "application/wasm"}]
+      },
+      {
+        "source": "Build/*.js.unityweb",
+        "headers": [{"key": "Content-Type", "value": "application/javascript"}]
+      }
+    ]
+  }
+}

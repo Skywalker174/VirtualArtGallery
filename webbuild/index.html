@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>The Virtual Gallery | Private View</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyB820a1eL5d3KHphqmLtx_qSRD59Zp8ues",
+        authDomain: "virtual-art-gallery-56498.firebaseapp.com",
+        projectId: "virtual-art-gallery-56498",
+        storageBucket: "virtual-art-gallery-56498.firebasestorage.app",
+        messagingSenderId: "194916913627",
+        appId: "1:194916913627:web:b9049dbba1d28bdc3b17fe",
+        measurementId: "G-WZYN4QPXMW"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="noise-overlay"></div>
+        <div class="content-wrapper">
+            <header>
+                <span class="label">ESTABLISHED 2026</span>
+                <span class="label">EXHIBITION NO. 01</span>
+            </header>
+            
+            <main>
+                <h1 class="hero-title">Virtual<br>Art Gallery</h1>
+                <p class="curator-description">An immersive digital sanctuary for the modern observer.</p>
+                
+                <div class="loader-container">
+                    <div id="progress-line"></div>
+                    <div id="progress-percentage">0%</div>
+                </div>
+
+                <button id="enter-btn" class="hidden">ENTER PRIVATE VIEW</button>
+            </main>
+
+            <footer>
+                <div class="control-hints">
+                    USE [WASD] TO NAVIGATE • [MOUSE] TO OBSERVE
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="app-viewport">
+        <canvas id="unity-canvas"></canvas>
+        
+        <nav class="gallery-nav">
+            <div class="gallery-label">THE GALLERY <span class="dim">/ PRIVATE VIEW</span></div>
+            <button id="fullscreen-trigger" title="Fullscreen">⛶</button>
+        </nav>
+    </div>
+
+    <script>
+        const canvas = document.querySelector("#unity-canvas");
+        const loadingScreen = document.querySelector("#loading-screen");
+        const progressLine = document.querySelector("#progress-line");
+        const progressPercent = document.querySelector("#progress-percentage");
+        const enterBtn = document.querySelector("#enter-btn");
+
+        const buildUrl = "Build";
+        const cacheBuster = Date.now();
+
+        const config = {
+            dataUrl: buildUrl + "/webbuild.data.unityweb?v=" + cacheBuster,
+            frameworkUrl: buildUrl + "/webbuild.framework.js.unityweb?v=" + cacheBuster,
+            codeUrl: buildUrl + "/webbuild.wasm.unityweb?v=" + cacheBuster,
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "DefaultCompany",
+            productName: "VirtualArtGallery",
+            productVersion: "0.1.0",
+            devicePixelRatio: Math.min(window.devicePixelRatio, 2)
+        };
+
+        const script = document.createElement("script");
+        script.src = buildUrl + "/webbuild.loader.js?v=" + cacheBuster;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                const p = Math.round(progress * 100);
+                progressLine.style.width = p + "%";
+                progressPercent.innerText = p + "%";
+            }).then((unityInstance) => {
+                enterBtn.classList.remove("hidden");
+                progressLine.parentElement.style.opacity = "0";
+                
+                enterBtn.onclick = () => {
+                    loadingScreen.classList.add("fade-out");
+                    setTimeout(() => loadingScreen.style.display = "none", 1200);
+                };
+
+                document.querySelector("#fullscreen-trigger").onclick = () => unityInstance.SetFullscreen(1);
+            }).catch((message) => {
+                console.error("Unity Load Error:", message);
+                progressPercent.innerText = "Error Loading Gallery";
+            });
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
