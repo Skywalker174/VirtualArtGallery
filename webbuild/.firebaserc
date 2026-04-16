@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "virtual-art-gallery-56498"
+  "hosting": {
+    "site": "virtualartgalleryv2",
+    "public": ".", 
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }

@@ -1,4 +1,3 @@
 repository "VirtualArtGallery/VirtualArtGallery@2475431039149@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main/Virtual Assistant" changeset "64"

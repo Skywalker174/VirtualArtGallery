@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "194916913627",
+    "firebase_url": "https://virtual-art-gallery-56498-default-rtdb.firebaseio.com",
+    "project_id": "virtual-art-gallery-56498",
+    "storage_bucket": "virtual-art-gallery-56498.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194916913627:android:211189c259abfdd93b17fe",
+        "android_client_info": {
+          "package_name": "com.virtualartgallerypa.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194916913627-hjp0oted0vmu4l5flijv220hggojlu7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD36-12iJ7hA42siI1LXvYMleBzhk7IdL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194916913627-hjp0oted0vmu4l5flijv220hggojlu7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

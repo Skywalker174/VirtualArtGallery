@@ -1,1 +1,7 @@
-[Library/], [Logs/], [UserSettings/], [built/], [*.csproj], [*.sln]
+Library/
+Temp/
+Logs/
+UserSettings/
+Assets/Firebase/Plugins/x86_64/
+*.so
+*.bundle

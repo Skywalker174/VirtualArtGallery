@@ -72,8 +72,9 @@
         const progressPercent = document.querySelector("#progress-percentage");
         const enterBtn = document.querySelector("#enter-btn");
 
+        // Path settings based on your new build structure
         const buildUrl = "Build";
-        const cacheBuster = Date.now();
+        const cacheBuster = Date.now(); // Prevents caching issues after updates
 
         const config = {
             dataUrl: buildUrl + "/webbuild.data.unityweb?v=" + cacheBuster,
@@ -83,17 +84,29 @@
             companyName: "DefaultCompany",
             productName: "VirtualArtGallery",
             productVersion: "0.1.0",
-            devicePixelRatio: Math.min(window.devicePixelRatio, 2)
+            // FIXED: Locked to 1.0 to prevent mobile memory crashes
+            devicePixelRatio: 1.0 
         };
+
+        // Mobile optimization logic
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
 
         const script = document.createElement("script");
         script.src = buildUrl + "/webbuild.loader.js?v=" + cacheBuster;
+        
         script.onload = () => {
             createUnityInstance(canvas, config, (progress) => {
+                // Update Custom Loader
                 const p = Math.round(progress * 100);
                 progressLine.style.width = p + "%";
                 progressPercent.innerText = p + "%";
             }).then((unityInstance) => {
+                // Loading Complete
                 enterBtn.classList.remove("hidden");
                 progressLine.parentElement.style.opacity = "0";
                 
