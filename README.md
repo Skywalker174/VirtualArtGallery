@@ -18,7 +18,7 @@ An immersive, web-based 3D environment designed to bridge the gap between physic
 * **Rendering:** Universal Render Pipeline (URP)
 * **Language:** C#
 * **Backend & Hosting:** Firebase
-* **Version Control:** Git
+* **Version Control:** Unity Version Control, Git
 
 ## 📁 Project Structure
 
